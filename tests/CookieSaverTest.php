@@ -30,8 +30,18 @@ class CookieSaverTest extends TestCase
         /**
          * @var Requests\Cookie $cookie
          */
-        $cookie = $jar[0];
+        $cookie = $jar['cookietest'];
         $this->assertInstanceOf(Requests\Cookie::class, $cookie);
         $this->assertEquals('testcookie', $cookie->value);
+        $session = new Requests\Session('https://httpbin.org/', options: ['cookies' => $jar]);
+        $response = $session->get('/cookies');
+        $cookies_response = $response->decode_body();
+        $this->assertEquals('testcookie', $cookies_response['cookies']['cookietest']);
+
+        //Change to value of the loaded cookie
+        $session->get('/cookies/set/cookietest/new_value');
+        $response = $session->get('/cookies');
+        $cookies_response = $response->decode_body();
+        $this->assertEquals('new_value', $cookies_response['cookies']['cookietest']);
     }
 }

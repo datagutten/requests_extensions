@@ -51,7 +51,7 @@ class CookieSaver
         $cookies = json_decode(file_get_contents($file), true);
         $cookie_objs = [];
         foreach ($cookies as $cookie) {
-            $cookie_objs[] = new Requests\Cookie($cookie['name'], $cookie['value'], $cookie['attributes'], $cookie['flags'], $cookie['reference_time']);
+            $cookie_objs[$cookie['name']] = new Requests\Cookie($cookie['name'], $cookie['value'], $cookie['attributes'], $cookie['flags'], $cookie['reference_time']);
         }
         return new Requests\Cookie\Jar($cookie_objs);
     }
