@@ -1,0 +1,14 @@
+[
+  {
+    "name": "cookietest",
+    "value": "testcookie",
+    "attributes": {},
+    "flags": {
+      "creation": 1666432552,
+      "last-access": 1666432552,
+      "persistent": false,
+      "host-only": true
+    },
+    "reference_time": 1666432552
+  }
+]
